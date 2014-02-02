@@ -690,12 +690,13 @@ function processdelayedactions(    i)
 		if ((amount[i] == "") || (src[i] == ""))
 			readtransaction(i)
 		retrieveaddressscript(src[i])
+		if (checkonly) continue
 		if (src[i] ~ singleaddrheadregexp)
 			retrieveprivkey(src[i])
 		else if (src[i] ~ multiaddrheadregexp) {
 			if ((multisig[src[i], 0] != "") && (redeem[src[i]] != ""))
 				retrievemultisigprivkey(src[i])
-			else if (! checkonly)
+			else
 				genwarning("Input " i " signing is skipped, you should provide '" src[i] "' participants")
 		}
 	}
